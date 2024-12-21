@@ -1,4 +1,4 @@
-import Globals, {Assert, Pair} from "../Globals";
+import Globals, {Assert, Pair} from "../Classes/globals";
 import Logger from "./Logger";
 
 class Settings {

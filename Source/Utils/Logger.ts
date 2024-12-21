@@ -1,4 +1,4 @@
-import Globals from "../Globals";
+import Globals from "../Classes/globals";
 import Color from "color";
 
 class Logger {

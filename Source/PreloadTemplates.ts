@@ -1,4 +1,4 @@
-import Globals from "./Globals";
+import Globals from "./Classes/globals";
 
 const PreloadTemplates = async (): Promise<Handlebars.TemplateDelegate<any>[]> => {
 	const rootPath = `${Globals.IsModule ? "modules" : "systems"}/${Globals.ModuleName}/templates/`;
