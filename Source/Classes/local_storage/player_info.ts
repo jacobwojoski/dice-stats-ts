@@ -8,20 +8,27 @@ export class Player {
     isGM: boolean = false;
 
     system_info: SystemInfo;
-    player_dice: DieInfo[] = new Array(NUM_DIE_TYPES);
+    player_dice: Map<DIE_TYPE, DieInfo> = new Map<DIE_TYPE, DieInfo>();
 
     constructor(userid: string){ 
+        // Setup info about the player with the realated User ID that was passed in
         if(userid){
             this.user_id = userid;
             
-            this.username = game?.users?.get(userid)?.name;
-            this.isGM = game?.users?.get(userid)?.isGM;
+            /* Vars: name & isGM aren't defined in typescript's type:user  by default. 
+                Need to cast it as any to fix error */
+            let user:any = game?.users?.get(userid) 
+            if (user){
+                this.username = user?.name;
+                this.isGM = user?.isGM;
+            }
         }
 
         // Create dice objects (Tracks each die roll)
         var playerDiceIt = 0;
-        for(let i in Object.values(DIE_TYPE)){
-            this.player_dice[playerDiceIt] = new DieInfo(i);
+        for(let type in DIE_TYPE){
+            const type_int:number = type?.value
+            this.player_dice.set(i, new DieInfo(i))
             playerDiceIt++;
         }
 
