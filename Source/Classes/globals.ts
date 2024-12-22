@@ -97,8 +97,7 @@ export class DS_GLOBALS {
         ENABLE_AUTO_DB:             'enable_auto_db',               // Rolling data gets saved to automatically and user load from DB on joining  [Def: true] (Global)
         OTHER_ACCESS_BUTTON_ICONS:  'player_access_icons',          // Change player icons to use custom                        [Default {STRING COMMA SEP}: fas fa-dice-d20]  (Global)
 
-        // Popup that gets shown to GM ONLY. Popup Asks if they want to "Clear ALL" Upon joining the game                       [Def: False] (Global)
-        GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP:   'global_enable_clear_all_stats_popup',
+        GLOBAL_PAUSE_SAVING_DATA:	'global_pause_saving_data',		// Disable saving any roll data until enabled				[Default: False] (Global)
 
         // Settings to enable or disable tab buttons on the UI [Def: Enabled] (Local)
         LOCAL_ENABLE_D20_DETAILS_TAB:     'local_enable_d20_details_tab',

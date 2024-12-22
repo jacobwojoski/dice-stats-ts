@@ -1,5 +1,6 @@
 import { DiceStatsTracker } from "../main";
 import { DS_GLOBALS } from "../globals";
+import { GetNamespaces } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client/core/settings.mjs";
 
 // Initialize dialog and settings on foundry boot up
 Hooks.once('init', () => {
@@ -17,32 +18,27 @@ Hooks.once('init', () => {
 
 // Autoload DB info on connection if setting is checked
 Hooks.once('ready', () => {
+    let DiceStats = DiceStatsTracker.get_instance();
+
     DS_GLOBALS.GAME_SYSTEM_ID = `${game?.system?.id}`;
 
-    //New Players might get added throught the game so update map on playerlist render. 
-    DS_GLOBALS.DS_OBJ_GLOBAL.updateMap();
+    // New Players might get added throught the game so update map on playerlist render. 
+    DiceStats.update_map();
 
-    //Comparison form needs player list which needs to wait for game to be in ready state.
-    DS_GLOBALS.DS_OBJ_GLOBAL.updateComparisonFormCheckboxes() 
+    // TODO: Update how we handle checkboxes now that callbacks can be bound ( Make all forms singleton classes? )
+    // Comparison form needs player list which needs to wait for game to be in ready state.
+    // DS_GLOBALS.DS_OBJ_GLOBAL.updateComparisonFormCheckboxes() 
 
-    if(game?.settings?.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
+    if(game?.settings?.get(<any>DS_GLOBALS.MODULE_ID, <any>DS_GLOBALS.MODULE_SETTINGS.ENABLE_AUTO_DB)) 
     {
-        DS_GLOBALS.DS_OBJ_GLOBAL.loadAllPlayerData();
-    }
-
-    // --- GM Clear all POPUP ---
-    // Check Setting if popup enabled, (I like tracking stats per session so I clear my data every game)
-    if( game?.user?.isGM &&
-        game?.settings?.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_ENABLE_CLEAR_ALL_STATS_POPUP))
-    {   // Bring Up Popup
-        DICE_STATS_UTILS.clearAllData();
+        DiceStatsTracker.get_instance().load_all_player_data();
     }
 });
 
-//Parse chat message when one gets displayed
+// Parse chat message when one gets displayed
 Hooks.on('createChatMessage', (chatMessage:any) => {
     // Check if were pausing saving player roll data
-    if(game?.settings?.get(DS_GLOBALS.MODULE_ID, DS_GLOBALS.MODULE_SETTINGS.GLOBAL_PAUSE_SAVING_DATA) === false){
-        DS_GLOBALS.DS_OBJ_GLOBAL.parseMessage(chatMessage);
+    if(game?.settings?.get(<any>DS_GLOBALS.MODULE_ID, <any>DS_GLOBALS.MODULE_SETTINGS.GLOBAL_PAUSE_SAVING_DATA) === false){
+        DiceStatsTracker.get_instance().parse_message(<any>chatMessage);
     }
 });
