@@ -47,12 +47,13 @@ export enum ROLL_TYPE {
 }
 
 /* Different forms the user can interact with */
-export let NUM_FORM_TYPES: number = 5
+export let NUM_FORM_TYPES: number = 6
 export enum FORM_TYPE {
 	UNKNOWN = 0,
 	GLOBAL_FORM,
 	COMPARE_FORM,
 	EXPORT_FORM,
+	IMPORT_FORM,
 	PLAYER_FORM
 }
 

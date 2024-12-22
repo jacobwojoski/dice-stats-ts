@@ -1,5 +1,7 @@
 import { Player } from "./local_storage/player_info";
 import { FORM_TYPE } from "./globals";
+
+import { DiceStatsForm } from "./ui-components/generic_dice_stats_form";
 /**
  * Main Dice Stats data storage class
  *  This is a singleton 
@@ -14,13 +16,22 @@ export class DiceStatsTracker {
         return DiceStatsTracker.instance
     }
 
-    // Main Storage Objects for Dice Stats, Array of Players & Array of UI Forms
+    // Main Storage Objects for Dice Stats, Map of Players & Map of UI Forms
     private _player_map = new Map<string, Player>();
-    private _forms = new Array();
+    // Forms are stored using type or playerid for PLAYER_FORMS. 
+    // Getting a value from a map returns a reference so we can edit the value saved there without calling store again.
+    private _forms = new Map<string, DiceStatsForm>;
+
 
     // Get a form object, Player form requires an ID to get
-    public get_form( type: FORM_TYPE, player_id: number = -1){
-        
+    public get_form( type: FORM_TYPE, player_id: string = ''): DiceStatsForm|undefined {
+        if(type == FORM_TYPE.PLAYER_FORM){
+            if (player_id != ''){
+                return this._forms.get(String(player_id));
+            }
+            return undefined
+        }
+        return this._forms.get(String(type));
     }
 
     /**
@@ -38,6 +49,13 @@ export class DiceStatsTracker {
     }
 
     /**
+     * Get list of player ID's in the map
+     */
+    public get_player_ids(){
+        return this._player_map.keys();
+    }
+
+    /**
      * Callback for when we receive a chat message. Parse the data and save it in the local data storage
      * @param chat_message - foundry chat message object 
      */
@@ -49,7 +67,7 @@ export class DiceStatsTracker {
 
         // Save System Sepecific Data
 
-        // Save Generic Data
+        // Save Roll Data to local db
     }
 
     /**
@@ -62,7 +80,16 @@ export class DiceStatsTracker {
     /**
      * Save our players player data into the flags DB
      */
-    public save_data(){
+    public save_data_to_db(){
         
+    }
+
+    /**
+     * 
+     * @param roll_data - roll data object holding system data & Dice Info
+     * @param player_id - ID of player that created the message ( Rolled the die ) 
+     */
+    public save_roll_data(roll_data:any, player_id:any){
+
     }
 }
