@@ -46,6 +46,16 @@ export enum ROLL_TYPE {
 	POOL_EXPLODING_LOW	 /* Dice Pools, Keep Lowest X num of  Exploding Dice*/
 }
 
+/* Different forms the user can interact with */
+export let NUM_FORM_TYPES: number = 5
+export enum FORM_TYPE {
+	UNKNOWN = 0,
+	GLOBAL_FORM,
+	COMPARE_FORM,
+	EXPORT_FORM,
+	PLAYER_FORM
+}
+
 /* Player form has multiple tabs,  */
 export enum PLAYER_FORM_TAB {
 	UNKNOWN = 0,

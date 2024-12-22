@@ -13,6 +13,7 @@ For the build pipeline to work properly you must define an environment variable 
 Windows Powershell:
 `[Environment]::SetEnvironmentVariable("FOUNDRY_PATH", ${Env:localappdata}+"\FoundryVTT", "User")`
 `EX: export FOUNDRY_PATH="/c/Users/Jacob/AppData/Local/FoundryVTT"`
+export FOUNDRY_PATH="/c/Users/Jacob/Desktop/FoundryDev/Data/modules/dice-stats-ts"
 
 Linux:
 Add `FOUNDRY_PATH="~/PATH/TO/FOUNDRY"; export FOUNDRY_PATH` to ~/.profile
@@ -30,6 +31,7 @@ cd MyCoolModule
 git remote set-url origin git@github.com:YourName/YourRepo.git
 
 : Install our dependcies
+npm add --include=dev github:League-of-Foundry-Developers/foundry-vtt-types#main  -- Add the V12 declerations
 npm install
 npm install @types/google.visualization     // Import Coocle charts stuff
 : Run the build!

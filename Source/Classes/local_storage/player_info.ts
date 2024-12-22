@@ -1,9 +1,6 @@
 import { DieInfo } from "./dice_info";
 import { NUM_DIE_TYPES, DIE_TYPE, DS_GLOBALS } from "../globals";
-
-import { SystemInfoFactory, SystemInfo, GenericSystemInfo } from "./system_info/generic_system_info";
-import { GAME_VIEWS } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
-
+import { SystemInfoFactory, SystemInfo } from "./system_info/generic_system_info";
 
 export class Player {
     username: string = '';
@@ -13,12 +10,12 @@ export class Player {
     system_info: SystemInfo;
     player_dice: DieInfo[] = new Array(NUM_DIE_TYPES);
 
-    constructor(userid: string){
-        
+    constructor(userid: string){ 
         if(userid){
             this.user_id = userid;
-            this.username = game.users.get(userid)?.name;
-            this.isGM = game.users.get(userid)?.isGM;
+            
+            this.username = game?.users?.get(userid)?.name;
+            this.isGM = game?.users?.get(userid)?.isGM;
         }
 
         // Create dice objects (Tracks each die roll)
