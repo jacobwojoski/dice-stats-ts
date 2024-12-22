@@ -25,11 +25,9 @@ export class Player {
         }
 
         // Create dice objects (Tracks each die roll)
-        var playerDiceIt = 0;
-        for(let type in DIE_TYPE){
-            const type_int:number = type?.value
-            this.player_dice.set(i, new DieInfo(i))
-            playerDiceIt++;
+        for( let type of Object.values(DIE_TYPE) ){
+            const die_max = Number(type)
+            this.player_dice.set(die_max, new DieInfo(die_max))
         }
 
         // Create System Data Info
