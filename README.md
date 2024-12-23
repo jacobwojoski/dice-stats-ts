@@ -31,9 +31,10 @@ cd MyCoolModule
 git remote set-url origin git@github.com:YourName/YourRepo.git
 
 : Install our dependcies
-npm add --include=dev github:League-of-Foundry-Developers/foundry-vtt-types#main  -- Add the V12 declerations
-npm install
+npm cache clear --force
+npm add --include=dev --legacy-peer-deps github:League-of-Foundry-Developers/foundry-vtt-types#main  // Add the V12 stuff
 npm install @types/google.visualization     // Import Coocle charts stuff
+npm install      
 : Run the build!
 npm run build
 ```
@@ -95,27 +96,29 @@ Whenever somone else rolls from this point on each client will parse the chat me
 3. Render the HBS html using the HBS data received
 
 ### What does each piece do
-- database: Interacting with FoundryVTT Flags to store and load player data betweegames
-- forms:    UI Components that extend foundrys default UI classes
-- import:   Google Charts lib for displaying nice graphs
-- local_storage:    The main storage Object structure for Dice Stats
-    Player /* Top level storage object */
-        System Info /* Roll Information that usually tied to specific systems */
+- database:         /* Interacting with FoundryVTT Flags to store and load player data betweegames */
+- import:           /* Google Charts lib for displaying nice graphs */
+- local_storage:    /* The main storage Object structure for Dice Stats */
+    Player              /* Top level storage object */
+        System Info         /* Roll Information that usually tied to specific systems */
             Degree Success Info         ( Fails / Success / Crits / etc )
             System Specifc Roll Info    ( Attacks / Saves / Initiative / etc )
             Dice Pools                  ( Advantage / Disadvantage / # Successes EX:BitD )
-        Dice /* Array of DICE Objects */
-            DieType /* D2, D4, D6, D8 ... etc */
-            DieMax  /* max possible value from die roll */
-            RollResults=[0:DieMax] /* Array of size DieMax thats an int to track num of times each value was rolled */
-            BlindRollResults /* Same as above but hidden from players untill GM pushes from this chart to RollResults */
-            Streaks /* Increasing numbers in a row 4,5,6 : 17,18,19 etc */
-    Message Roll Info       /* All data from message thats important, System Parsers handle getting what we need. This gets sorted and placed in local Info */
+        Dice                /* Array of DICE Objects */
+            DieType                     /* D2, D4, D6, D8 ... etc */
+            DieMax                      /* max possible value from die roll */
+            RollResults=[0:DieMax]      /* Array of size DieMax thats an int to track num of times each value was rolled */
+            BlindRollResults            /* Same as above but hidden from players untill GM pushes from this chart to RollResults */
+            Streaks                     /* Increasing numbers in a row 4,5,6 : 17,18,19 etc */
+    Message Roll Info  /* All data from message thats important, System Parsers handle getting what we need. This gets sorted and placed in local Info */
         Message Die info    /* Die Specifc info from message thats important */
 - message_parsers:  /* System specific implementation to pull data from Foundry Message objects to be stored in Message Objects */
-- utils: Utility funtions
-    hbs_helpers:/* Helper funtions for handlebars templates */
-    hbs_packer: /* Convert local_storage into objects that handlebars templates can use */
-    hooks:      /* Deal with any foundry specifc hooks like init & createChatMessage */
-    sockets:    /* A way to update data between different clients (players) */
-    utils:      /* Misc Utility funtions */
+- ui-components:    /* UI Components that extend foundrys default UI classes */
+    forms:              /* Any  ui component that extends FormApplication */
+    misc:               /* Other UI Components, Mainly Scene Control Buttons */
+- utils:            /* Utility funtions */
+    hbs_helpers:        /* Helper funtions for handlebars templates */
+    hbs_packer:         /* Convert local_storage into objects that handlebars templates can use */
+    hooks:              /* Deal with any foundry specifc hooks like init & createChatMessage */
+    sockets:            /* A way to update data between different clients (players) */
+    utils:              /* Misc Utility funtions */
