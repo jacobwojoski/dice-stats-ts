@@ -1,6 +1,13 @@
-import { ROLL_TYPE } from "../../globals";
+import { DIE_TYPE, ROLL_TYPE } from "../../globals";
 import { SystemInfo } from "./generic_system_info";
 import { DiceStatsUtils } from "../../utils/utils";
+
+export class Pf2eWepSpellStats {
+    name = '';
+    die_type = DIE_TYPE.UNKNOWN;
+    num_dice = 0;
+    dice_stats = new Array(); /* length = (DIE_TYPE * num_dice) */
+}
 
 export class Pf2eSystemPlayerInfo {
     DEGREE_SUCCESS = {
@@ -11,8 +18,8 @@ export class Pf2eSystemPlayerInfo {
         CRIT_SUCCESS: 4
     }
 
-    NUM_DIE_OUTCOMES:number = 20;   /* 1-20 on the die */
-    NUM_DEGREE_SUCCESS:number = 5;  /* UNKNOWN, CF, F, S, CS */
+    static NUM_DIE_OUTCOMES:number = 20;   /* 1-20 on the die */
+    static NUM_DEGREE_SUCCESS:number = 5;  /* UNKNOWN, CF, F, S, CS */
     player_id:string = '';
 
 
@@ -51,8 +58,15 @@ export class Pf2eSystemPlayerInfo {
     max_damage = 0;
     min_damage = 0;
 
+    atk_deg_success = Array(Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+    your_save_deg_success = Array(Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+    saves_against_you_deg_success = Array(Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+    skill_deg_success = Array(Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+
+
     /* TODO: Can we store damage stats in a cool way? */
-    /* Create map for every every spell & every weapon used in session but don't save this info to DB? */
+    /* Create map for cantrips & every (non GM) weapon used in session but don't save this info to DB? */
+    specific_roll_stats: = new Array();
 
     /* Add system data together, Used to add a newly created obj into the local obj */
     add(obj:Pf2eSystemPlayerInfo){
