@@ -1,4 +1,4 @@
-import { ValueOf } from "@league-of-foundry-developers/foundry-vtt-types/src/utils/index.mjs";
+
 import { DIE_TYPE, ROLL_TYPE } from "../globals";
 import { SystemInfo } from "../local_storage/system_info/generic_system_info";
 

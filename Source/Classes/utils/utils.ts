@@ -99,4 +99,69 @@ export class DiceStatsUtils {
         }
         return 0;
     }
+
+    /* Create multi dim arrays */
+    static init_upto_d3_arrays(x:number, y:number = 0, z:number = 0){
+        let ret_ary = new Array(x);
+
+        // Create 2d arrays
+        if (y>0){
+            for(let a=0; a<x; a++){
+                ret_ary[a] = new Array(y);
+    
+                // Create 3d arrays
+                if(z>0){
+                    for(let b=0; b<y; b++){
+                        ret_ary[a][b] = new Array(z);
+                    }
+                }
+            }
+        }
+        return ret_ary;
+    }
+
+    /* Add arrays */
+    static add_arrays(vals_to_add:number[], orig:number[]|undefined, clear_add=false){
+        if (orig == undefined){return}
+        let xLen = orig.length;
+        for (let x=0; x<xLen; x++){
+            orig[x] = orig[x]+vals_to_add[x];
+            if(clear_add){
+                vals_to_add[x] = 0;
+            }
+        }
+    }
+
+    /* Add 2 arrays */
+    static add_2d_arrays(vals_to_add:number[][], orig:number[][]|undefined, clear_add=false){
+        if (orig == undefined){return}
+        let xLen = orig.length;
+        let yLen = orig[0].length;
+        for (let x=0; x<xLen; x++){
+            for(let y=0; y<yLen; y++){
+                orig[x][y] = orig[x][y]+vals_to_add[x][y];
+                if(clear_add){
+                    vals_to_add[x][y] = 0;
+                }
+            }
+        }
+    }
+
+    /* Add 3d arrays */
+    static add_3d_arrays(vals_to_add:number[][][], orig:number[][][]|undefined, clear_add=false){
+        if (orig == undefined){return}
+        let xLen = orig.length;
+        let yLen = orig[0].length;
+        let zLen = orig[0][0].length;
+        for (let x=0; x<xLen; x++){
+            for(let y=0; y<yLen; y++){
+                for(let z=0; z<zLen; z++){
+                    orig[x][y][z] = orig[x][y][z]+vals_to_add[x][y][z];
+                    if(clear_add){
+                        vals_to_add[x][y][z] = 0;
+                    }
+                }
+            }
+        }
+    }
 }
