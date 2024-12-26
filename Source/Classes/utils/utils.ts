@@ -101,7 +101,7 @@ export class DiceStatsUtils {
     }
 
     /* Create multi dim arrays */
-    static init_upto_d3_arrays(x:number, y:number = 0, z:number = 0){
+    static init_upto_3d_arrays(x:number, y:number = 0, z:number = 0){
         let ret_ary = new Array(x);
 
         // Create 2d arrays
