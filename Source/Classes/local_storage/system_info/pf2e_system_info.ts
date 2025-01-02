@@ -10,7 +10,7 @@ export class Pf2eWepSpellStats {
 }
 
 export class Pf2eSystemPlayerInfo {
-    DEGREE_SUCCESS = {
+    static DEGREE_SUCCESS = {
         UNKNOWN: 0,
         CRIT_FAIL: 1,
         FAIL: 2,
@@ -66,7 +66,7 @@ export class Pf2eSystemPlayerInfo {
 
     /* TODO: Can we store damage stats in a cool way? */
     /* Create map for cantrips & every (non GM) weapon used in session but don't save this info to DB? */
-    specific_roll_stats: = new Array();
+    specific_roll_stats = new Array();
 
     /* Add system data together, Used to add a newly created obj into the local obj */
     add(obj:Pf2eSystemPlayerInfo){
@@ -82,16 +82,16 @@ export class Pf2eSystemPlayerInfo {
     init_all_arrays(){
         this.is_array_init = true;
 
-        this.d20_attack_ary =       DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS)
-        this.d20_dmg_ary =          DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS);
-        this.d20_heal_ary =         DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS);
-        this.d20_your_saves_ary =           DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS);
-        this.d20_saves_against_you_ary =    DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS);
-        this.d20_skill_ary =        DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS);
-        this.d20_ability_ary =      DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS);
-        this.d20_perception_ary =   DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS);
-        this.d20_initiative_ary =   DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES,this.NUM_DEGREE_SUCCESS);
-        this.d20_unknown_ary =       DiceStatsUtils.init_upto_d3_arrays(this.NUM_DIE_OUTCOMES);
+        this.d20_attack_ary =       DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS)
+        this.d20_dmg_ary =          DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+        this.d20_heal_ary =         DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+        this.d20_your_saves_ary =           DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+        this.d20_saves_against_you_ary =    DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+        this.d20_skill_ary =        DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+        this.d20_ability_ary =      DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+        this.d20_perception_ary =   DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+        this.d20_initiative_ary =   DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES,Pf2eSystemPlayerInfo.NUM_DEGREE_SUCCESS);
+        this.d20_unknown_ary =       DiceStatsUtils.init_upto_d3_arrays(Pf2eSystemPlayerInfo.NUM_DIE_OUTCOMES);
     }
 }
 
