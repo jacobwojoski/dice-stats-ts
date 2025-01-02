@@ -72,6 +72,14 @@ export class GenericMessageParser implements MessageParser {
                         // Get roll value (int)
                         savedDieObj.value = msgDieResultSel.result;
 
+                        // Validate roll result
+                        if ( savedDieObj.value > sides ){
+                            savedDieObj.value = sides;
+                        // varify > 0 dnot 1 due to d10's
+                        }else if ( savedDieObj.value < 0 ){
+                            savedDieObj.value = 0;
+                        }
+
                         // Add die info to roll storage obj
                         savedRollObj.dice.push(savedDieObj);
                     }
