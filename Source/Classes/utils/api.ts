@@ -1,5 +1,6 @@
 /* Import Obj's */
-import { DS_GLOBALS, FORM_TYPE } from "../globals.js";
+import { DIE_TYPE, DS_GLOBALS, FORM_TYPE } from "../globals.js";
+import { GenericSystemInfo } from "../local_storage/system_info/generic_system_info.js";
 import { DiceStatsTracker } from "../main.js";
 
 /* Import UI's */
@@ -89,9 +90,17 @@ export class DiceStatsAPI {
         }
     }
 
+
     /**
      * TODO:
      * save_roll
      * save_system_data
      */
+    static add_roll(player_id:string, die_type:DIE_TYPE, die_value:number){
+        return;
+    }
+
+    static add_system_data(system_info:GenericSystemInfo){
+        return;
+    }
 }

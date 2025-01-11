@@ -21,7 +21,7 @@ export class Pf2eSystemPlayerInfo {
 
     static NUM_DIE_OUTCOMES:number = 20;   /* 1-20 on the die */
     static NUM_DEGREE_SUCCESS:number = 6;  /* UNKNOWN, CF, F, S, CS, TOTALS */
-    static NUM_ARRAY_TYPES:number = 10;
+    static NUM_ARRAY_TYPES:number = 10; /* atk ary, dmg ary, heal ary, etc*/
     player_id:string = '';
 
     /**
@@ -47,6 +47,11 @@ export class Pf2eSystemPlayerInfo {
     _means: number[]     = new Array(Pf2eSystemPlayerInfo.NUM_ARRAY_TYPES);
     _medians: number[]   = new Array(Pf2eSystemPlayerInfo.NUM_ARRAY_TYPES);
     _modes: number[]     = new Array(Pf2eSystemPlayerInfo.NUM_ARRAY_TYPES);
+
+    /* [d20kh1][deg_success] */
+    advantage_rolls: number[][] = new Array();
+    /* [d20kl1][deg_success] */
+    disadvantage_rolls: number[][] = new Array();
 
     advantage_helped    = 0;
     advantage_hurt      = 0;
